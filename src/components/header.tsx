@@ -2,8 +2,8 @@ import { Logo } from './logo';
 
 export function Header() {
   return (
-    <header className="py-4 px-4 sm:px-6 lg:px-8 border-b bg-card">
-      <div className="container mx-auto">
+    <header className="py-4 px-4 sm:px-6 lg:px-8 border-b bg-background/80 backdrop-blur-sm sticky top-0 z-40">
+      <div className="container mx-auto flex justify-between items-center">
         <Logo />
       </div>
     </header>

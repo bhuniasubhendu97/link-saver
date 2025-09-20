@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { PlusCircle, Loader, AlertTriangle, Wand2, CheckCircle } from "lucide-react";
+import { Plus, Loader, AlertTriangle, Wand2, CheckCircle, Link2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -105,32 +105,35 @@ export function LinkForm({ onLinkAdded }: LinkFormProps) {
 
   return (
     <>
-      <Card className="w-full max-w-2xl mx-auto shadow-lg border-primary/20">
+      <Card className="w-full max-w-2xl mx-auto shadow-sm">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 font-headline">
-            <PlusCircle className="text-primary" />
+          <CardTitle className="flex items-center gap-2 font-heading">
+            <Plus className="h-5 w-5" />
             Add New Link
           </CardTitle>
           <CardDescription>
-            Paste a video link and we'll categorize it for you.
+            Paste a video link and we'll categorize it for you using AI.
           </CardDescription>
         </CardHeader>
         <CardContent>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col sm:flex-row gap-4">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="flex items-start flex-col sm:flex-row gap-4">
               <FormField
                 control={form.control}
                 name="url"
                 render={({ field }) => (
-                  <FormItem className="flex-grow">
+                  <FormItem className="w-full">
                     <FormControl>
-                      <Input placeholder="https://www.example.com/video" {...field} />
+                      <div className="relative">
+                        <Link2 className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                        <Input placeholder="https://www.youtube.com/watch?v=..." {...field} className="pl-10 h-11" />
+                      </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <Button type="submit" disabled={isSubmitting} className="w-full sm:w-auto bg-accent hover:bg-accent/90">
+              <Button type="submit" disabled={isSubmitting} className="w-full sm:w-auto h-11 shrink-0 bg-primary hover:bg-primary/90">
                 {isSubmitting ? (
                   <>
                     <Loader className="mr-2 h-4 w-4 animate-spin" />

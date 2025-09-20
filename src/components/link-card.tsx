@@ -33,20 +33,21 @@ const categoryVariants: { [key: string]: "default" | "secondary" | "destructive"
 export function LinkCard({ link, onDelete }: LinkCardProps) {
   return (
     <TooltipProvider>
-      <Card className="flex flex-col h-full hover:shadow-xl transition-shadow duration-300 bg-card overflow-hidden">
-        <div className="relative w-full aspect-video">
+      <Card className="flex flex-col h-full group overflow-hidden">
+         <div className="relative w-full aspect-video overflow-hidden">
            <Image 
             src={link.thumbnailUrl || `https://picsum.photos/seed/${link.id}/600/400`}
             alt={`Thumbnail for ${link.title}`}
             fill
-            className="object-cover"
+            className="object-cover group-hover:scale-105 transition-transform duration-300"
             data-ai-hint="video thumbnail"
            />
+           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
         </div>
-        <CardHeader>
+        <CardHeader className="pt-4">
           <div className="flex justify-between items-start gap-4">
-            <CardTitle className="font-headline text-lg break-words">{link.title}</CardTitle>
-            <Badge variant={categoryVariants[link.category] || "outline"} className="shrink-0 capitalize">{link.category}</Badge>
+            <CardTitle className="font-heading text-lg break-words">{link.title}</CardTitle>
+            <Badge variant={categoryVariants[link.category] || "outline"} className="shrink-0 capitalize text-nowrap">{link.category}</Badge>
           </div>
           <CardDescription className="break-all pt-1">
             <Tooltip>
@@ -64,7 +65,7 @@ export function LinkCard({ link, onDelete }: LinkCardProps) {
         <CardContent className="flex-grow">
           <p className="text-sm text-muted-foreground line-clamp-2">{link.description}</p>
         </CardContent>
-        <CardFooter className="flex justify-between items-center text-sm text-muted-foreground">
+        <CardFooter className="flex justify-between items-center text-sm text-muted-foreground bg-card/50 py-3 px-4 sm:px-6">
           <div className="flex items-center gap-1.5">
             <CalendarDays className="h-4 w-4" />
             <span>{formatDistanceToNow(new Date(link.createdAt), { addSuffix: true })}</span>

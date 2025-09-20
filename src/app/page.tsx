@@ -43,14 +43,19 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground">
       <Header />
-      <main className="flex-grow py-8 px-4 sm:px-6 lg:px-8 space-y-12">
+      <main className="flex-grow container mx-auto py-8 px-4 sm:px-6 lg:px-8 space-y-12">
         <LinkForm onLinkAdded={handleLinkAdded} />
-        <Separator />
-        <h2 className="text-3xl font-bold text-center font-headline tracking-tight">Your Link Library</h2>
+        <Separator className="my-12" />
+        <div className="space-y-4">
+          <h2 className="text-3xl font-bold text-center font-heading tracking-tight">Your Link Library</h2>
+          <p className="text-muted-foreground text-center max-w-2xl mx-auto">
+            Browse, search, and manage your saved links. Your collection is stored locally in your browser.
+          </p>
+        </div>
         {isClient ? <LinkLibrary links={links} onDelete={handleDelete} /> : <LibrarySkeleton />}
       </main>
-      <footer className="text-center py-4 text-sm text-muted-foreground border-t">
-        <p>LinkWise - Your smart video companion.</p>
+      <footer className="text-center py-6 text-sm text-muted-foreground border-t">
+        <p>&copy; {new Date().getFullYear()} LinkWise - Your smart video companion.</p>
       </footer>
     </div>
   );
