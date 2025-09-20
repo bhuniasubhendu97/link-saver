@@ -1,5 +1,3 @@
-import { categorizeSharedVideoLink } from "@/ai/flows/categorize-shared-video-link";
-
 export type SavedLink = {
   id: string;
   url: string;
@@ -10,8 +8,8 @@ export type SavedLink = {
 };
 
 export type CategorizationResult = {
-  category: string;
-  confidence: number;
   title: string;
   description: string;
+  category: string;
+  confidence: number;
 };

@@ -12,19 +12,14 @@ import {z} from 'genkit';
 
 const CategorizeSharedVideoLinkInputSchema = z.object({
   link: z.string().url().describe('The URL of the shared video.'),
-  metadata: z
-    .object({
-      title: z.string().optional().describe('The title of the video.'),
-      description: z.string().optional().describe('The description of the video.'),
-    })
-    .optional()
-    .describe('Additional metadata about the video, such as title and description.'),
 });
 export type CategorizeSharedVideoLinkInput = z.infer<
   typeof CategorizeSharedVideoLinkInputSchema
 >;
 
 const CategorizeSharedVideoLinkOutputSchema = z.object({
+  title: z.string().describe('The original title of the video.'),
+  description: z.string().describe('The original description of the video.'),
   category: z.string().describe('The predicted category of the video.'),
   confidence: z
     .number()
@@ -48,21 +43,15 @@ const prompt = ai.definePrompt({
   output: {schema: CategorizeSharedVideoLinkOutputSchema},
   prompt: `You are an AI expert in categorizing videos based on their content.
 
-  Analyze the following video link and its metadata (title, description) to determine the most appropriate category for the video.
+  Visit the given video link, extract the original title and any available description.
+  Generate the most accurate category. Available categories: Music, Sports, Education, Movies, News, Gaming, Entertainment, or suggest a new category if none of these fit well.
 
-  Available categories: Music, Sports, Education, Movies, News, Gaming, Entertainment, Other.
-
-  Respond with the predicted category and a confidence level (0 to 1) for your prediction.
+  Analyze the content at the following video link to determine the most appropriate category for the video.
 
   Here is the video link:
   {{link}}
 
-  Here is the video metadata:
-  Title: {{metadata.title}}
-  Description: {{metadata.description}}
-
-  Category: {{category}}
-  Confidence: {{confidence}}`,
+  Return the original title, the assigned category, and a confidence score for your categorization.`,
 });
 
 const categorizeSharedVideoLinkFlow = ai.defineFlow(
