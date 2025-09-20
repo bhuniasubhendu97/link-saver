@@ -26,6 +26,7 @@ const CategorizeSharedVideoLinkOutputSchema = z.object({
     .min(0)
     .max(1)
     .describe('The confidence level of the category prediction (0 to 1).'),
+  thumbnailUrl: z.string().url().describe("A URL for the video's thumbnail image."),
 });
 export type CategorizeSharedVideoLinkOutput = z.infer<
   typeof CategorizeSharedVideoLinkOutputSchema
@@ -43,7 +44,7 @@ const prompt = ai.definePrompt({
   output: {schema: CategorizeSharedVideoLinkOutputSchema},
   prompt: `You are an AI expert in categorizing videos based on their content.
 
-  Visit the given video link, extract the original title and any available description.
+  Visit the given video link, extract the original title, any available description, and a URL for a thumbnail image.
   Generate the most accurate category. Available categories: Music, Sports, Education, Movies, News, Gaming, Entertainment, or suggest a new category if none of these fit well.
 
   Analyze the content at the following video link to determine the most appropriate category for the video.
@@ -51,7 +52,7 @@ const prompt = ai.definePrompt({
   Here is the video link:
   {{link}}
 
-  Return the original title, the assigned category, and a confidence score for your categorization.`,
+  Return the original title, the assigned category, a confidence score for your categorization, and the thumbnail URL.`,
 });
 
 const categorizeSharedVideoLinkFlow = ai.defineFlow(

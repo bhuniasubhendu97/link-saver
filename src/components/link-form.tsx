@@ -51,6 +51,7 @@ export function LinkForm({ onLinkAdded }: LinkFormProps) {
           title: result.title,
           description: result.description,
           category: result.category,
+          thumbnailUrl: result.thumbnailUrl,
           createdAt: new Date().toISOString(),
         };
         onLinkAdded(newLink);
@@ -85,6 +86,7 @@ export function LinkForm({ onLinkAdded }: LinkFormProps) {
         title: categorizationResult.title,
         description: categorizationResult.description,
         category: category,
+        thumbnailUrl: categorizationResult.thumbnailUrl,
         createdAt: new Date().toISOString(),
     };
     onLinkAdded(newLink);

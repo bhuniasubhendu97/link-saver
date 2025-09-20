@@ -4,6 +4,7 @@ export type SavedLink = {
   title: string;
   description: string;
   category: string;
+  thumbnailUrl: string;
   createdAt: string;
 };
 
@@ -12,4 +13,5 @@ export type CategorizationResult = {
   description: string;
   category: string;
   confidence: number;
+  thumbnailUrl: string;
 };

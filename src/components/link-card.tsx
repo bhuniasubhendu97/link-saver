@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -32,7 +33,16 @@ const categoryVariants: { [key: string]: "default" | "secondary" | "destructive"
 export function LinkCard({ link, onDelete }: LinkCardProps) {
   return (
     <TooltipProvider>
-      <Card className="flex flex-col h-full hover:shadow-xl transition-shadow duration-300 bg-card">
+      <Card className="flex flex-col h-full hover:shadow-xl transition-shadow duration-300 bg-card overflow-hidden">
+        <div className="relative w-full aspect-video">
+           <Image 
+            src={link.thumbnailUrl || `https://picsum.photos/seed/${link.id}/600/400`}
+            alt={`Thumbnail for ${link.title}`}
+            fill
+            className="object-cover"
+            data-ai-hint="video thumbnail"
+           />
+        </div>
         <CardHeader>
           <div className="flex justify-between items-start gap-4">
             <CardTitle className="font-headline text-lg break-words">{link.title}</CardTitle>
